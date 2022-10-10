@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  php:
+    build:
+      context: .
+    healthcheck:
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
+    depends_on:
+      - elasticsearch
+    environment:
+      - APP_ENV=dev
+    volumes:
+      - .:/home/www/app:rw,cached
+      - php-socket:/home/www/php
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.6@sha256:af43249cab60c8069a7868517b5c9d0f6481c6a1ac00e8ec3fa3ae614fb99e63
+    environment:
+      - http.port=9222
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - 'ES_JAVA_OPTS=-Xms1024m -Xmx1024m'
+    ports:
+      - '9222:9222'
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+
+volumes:
+  elasticsearch-data: {}
+  php-socket: {}

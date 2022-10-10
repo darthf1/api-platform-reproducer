@@ -1,0 +1,34 @@
+<?php //subresource_operations_ff3e48e740ad9ffe7cde04c65860c830
+
+return [PHP_INT_MAX, [
+    'api_my_entities_my_other_entities_get_subresource' => [
+        'property' => 'myOtherEntities',
+        'collection' => true,
+        'resource_class' => 'App\\Entity\\MyOtherEntity',
+        'shortNames' => [
+            'MyOtherEntity',
+            'MyEntity',
+        ],
+        'legacy_filters' => [],
+        'legacy_normalization_context' => [],
+        'legacy_type' => null,
+        'identifiers' => [
+            'id' => [
+                'App\\Entity\\MyEntity',
+                'id',
+                true,
+            ],
+        ],
+        'operation_name' => 'my_other_entities_get_subresource',
+        'route_name' => 'api_my_entities_my_other_entities_get_subresource',
+        'path' => '/my_entities/{id}/my_other_entities.{_format}',
+        'defaults' => [],
+        'requirements' => [],
+        'options' => [],
+        'host' => '',
+        'schemes' => [],
+        'condition' => '',
+        'controller' => null,
+        'stateless' => null,
+    ],
+]];

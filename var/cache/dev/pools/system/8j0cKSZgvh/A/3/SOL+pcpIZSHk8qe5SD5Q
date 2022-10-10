@@ -1,0 +1,20 @@
+<?php //index_metadatabfaf6307e90aabe4c29d06c8be667ba4
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['ApiPlatform\\Elasticsearch\\Metadata\\Document\\DocumentMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Elasticsearch\\Metadata\\Document\\DocumentMetadata')),
+    ],
+    null,
+    [
+        'ApiPlatform\\Elasticsearch\\Metadata\\Document\\DocumentMetadata' => [
+            'index' => [
+                'my_other_entity',
+            ],
+            'type' => [
+                '_doc',
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];
