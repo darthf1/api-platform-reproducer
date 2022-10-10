@@ -9,6 +9,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 #[ApiResource(
+    attributes: [
+        'order' => [
+            '_id' => 'ASC',
+        ],
+    ],
     collectionOperations: [
         Request::METHOD_GET => [
             'controller' => NotFoundAction::class,

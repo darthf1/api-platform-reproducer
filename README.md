@@ -1,14 +1,14 @@
 # Api Platform reproducer 2.7 upgrade
 
-Reproducer https://github.com/api-platform/core/issues/5005
+Reproducer for issue https://github.com/api-platform/core/issues/5005
 
 ## How to reproduce:
-- git clone https://github.com/darthf1/api-platform-reproducer.git
-- cd api-platform-reproducer
-- git checkout master
-- docker compose up -d --build
-- docker compose exec php composer install
-- docker compose exec php bin/phpunit
+- `git clone https://github.com/darthf1/api-platform-reproducer.git`
+- `cd api-platform-reproducer`
+- `git checkout master`
+- `docker compose up -d --build`
+- `docker compose exec php composer install`
+- `docker compose exec php bin/phpunit`
 
 ### Output
 ```
@@ -44,4 +44,20 @@ Tests: 1, Assertions: 0, Errors: 1.
 Remaining indirect deprecation notices (17)
 
 Other deprecation notices (25)
+```
+
+## How to check output on APIP 2.6.8
+- `docker compose exec php composer require api-platform/core:v2.6.8`
+- `docker-compose exec php bin/phpunit`
+
+### Output
+```
+Testing 
+.                                                                   1 / 1 (100%)
+
+Time: 00:00.704, Memory: 50.50 MB
+
+OK (1 test, 1 assertion)
+
+Remaining indirect deprecation notices (37)
 ```

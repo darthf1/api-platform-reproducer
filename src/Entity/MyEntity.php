@@ -6,7 +6,13 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 
-#[ApiResource]
+#[ApiResource(
+    attributes: [
+        'order' => [
+            '_id' => 'ASC',
+        ],
+    ],
+)]
 class MyEntity
 {
     #[ApiProperty(identifier: true)]
