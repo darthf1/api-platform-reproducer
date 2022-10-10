@@ -82,9 +82,29 @@ class Test extends ApiTestCase
     public function testGetMyEntities(): void
     {
         $client = self::createClient();
-        $client->request('GET', '/api/my_entities/48e73400-4361-46b3-8d99-d9d6f4b256a1/my_other_entities');
+        $response = $client->request('GET', '/api/my_entities/48e73400-4361-46b3-8d99-d9d6f4b256a1/my_other_entities');
 
         self::assertResponseIsSuccessful();
+        self::assertSame([
+            '@context' => '/api/contexts/MyOtherEntity',
+            '@id' => '/api/my_entities/48e73400-4361-46b3-8d99-d9d6f4b256a1/my_other_entities',
+            '@type' => 'hydra:Collection',
+            'hydra:member' => [
+                [
+                     '@id' => '/api/my_other_entities/48e73400-4361-46b3-8d99-d9d6f4b256a1',
+                     '@type' => 'MyOtherEntity',
+                     'id' => '48e73400-4361-46b3-8d99-d9d6f4b256a1',
+                     'description' => 'first-description',
+                ],
+                [
+                     '@id' => '/api/my_other_entities/b1f085bb-a92d-4122-a547-0ea44ee4956f',
+                     '@type' => 'MyOtherEntity',
+                     'id' => 'b1f085bb-a92d-4122-a547-0ea44ee4956f',
+                     'description' => 'second-description',
+                ]
+            ],
+            'hydra:totalItems' => 2,
+        ], $response->toArray());
     }
 
     /**
