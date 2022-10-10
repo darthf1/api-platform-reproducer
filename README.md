@@ -46,6 +46,56 @@ Remaining indirect deprecation notices (17)
 Other deprecation notices (25)
 ```
 
+### Decorating the service
+On v2.7.2 the error goes away when the provider service is decorated, instead of injecting the provider as an argument:
+
+from:
+```yaml
+services:
+    App\ApiPlatform\DataProvider\MyCollectionDataProvider:
+      arguments:
+        $collectionDataProvider: '@api_platform.elasticsearch.collection_data_provider'
+```
+to
+```yaml
+services:
+    App\ApiPlatform\DataProvider\MyCollectionDataProvider:
+      decorates: 'api_platform.elasticsearch.collection_data_provider'
+```
+
+However, this changes the output of the test. 
+```
+There was 1 failure:
+
+1) App\Tests\Test::testGetMyEntities
+Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+     '@context' => '/api/contexts/MyOtherEntity'
+     '@id' => '/api/my_entities/48e73400-4361-46b3-8d99-d9d6f4b256a1/my_other_entities'
+     '@type' => 'hydra:Collection'
+-    'hydra:member' => Array &1 (
+-        0 => Array &2 (
+-            '@id' => '/api/my_other_entities/48e73400-4361-46b3-8d99-d9d6f4b256a1'
+-            '@type' => 'MyOtherEntity'
+-            'id' => '48e73400-4361-46b3-8d99-d9d6f4b256a1'
+-            'description' => 'first-description'
+-        )
+-        1 => Array &3 (
+-            '@id' => '/api/my_other_entities/b1f085bb-a92d-4122-a547-0ea44ee4956f'
+-            '@type' => 'MyOtherEntity'
+-            'id' => 'b1f085bb-a92d-4122-a547-0ea44ee4956f'
+-            'description' => 'second-description'
+-        )
+-    )
+-    'hydra:totalItems' => 2
++    'hydra:member' => Array &1 ()
++    'hydra:totalItems' => 0
+ )
+```
+
+
 ## How to check output on APIP 2.6.8
 - `docker compose exec php composer require api-platform/core:v2.6.8`
 - `docker-compose exec php bin/phpunit`
